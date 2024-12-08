@@ -14,16 +14,27 @@ public class TemplateEmailService {
         return new String(encoded, StandardCharsets.UTF_8);
     }
 
-    public String formatTokenEmailHtml(String token, String name) throws IOException {
+    public String formatTokenEmailHtml(String token, String username) throws IOException {
         String htmlBody = readHtmlFile("src/main/resources/templates/TokenEmailTemplate.html");
 
-        htmlBody = htmlBody.replace("$USERNAME$", name);
-        htmlBody = htmlBody.replace("$TOKEN$", token);
+        htmlBody = htmlBody.replace("$USERNAME$", username)
+                            .replace("$TOKEN$", token);
 
         return htmlBody;
     }
 
-    public String formatSubscriptionEmailHtml() {
-        return "<h1>Oi</h1>";
+    public String formatSubscriptionEmailHtml(String username) throws IOException {
+        String htmlBody = readHtmlFile("src/main/resources/templates/SubscriptionEmailTemplate.html");
+
+        htmlBody = htmlBody.replace("$USERNAME$", username);
+
+        /* htmlBody = htmlBody.replace("$TITLE$", responseApi.getTitle())
+                            .replace("$DATE$", responseApi.getDate())
+                            .replace("$DATE$", responseApi.getDate())
+                            .replace("$EXPLANATION$", responseApi.getExplanation())
+                            .replace("$PICTURE$", responseApi.getPicture())
+                            .replace("$USERNAME$", subscription.getUsername()); */
+
+        return htmlBody;
     }
 }
