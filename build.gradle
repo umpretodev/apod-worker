@@ -27,6 +27,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-amqp'
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.13.0'
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
