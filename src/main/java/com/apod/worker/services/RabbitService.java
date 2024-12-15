@@ -23,13 +23,20 @@ public class RabbitService {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @RabbitListener(queues = {"email_queue"})
-    public void receiveMessage (@Payload String message) throws IOException, MessagingException, InterruptedException {
-        log.info("message received: {}", message);
-        RabbitMessageDto rabbitMessageDto = objectMapper.readValue(message, RabbitMessageDto.class);
-        var typeMessage = rabbitMessageDto.type();
+    public void receiveMessage (@Payload String message)  {
+        try {
+            log.info("message received: {}", message);
 
-        if (typeMessage.equals("token")) { sendtokenValidationEmail(rabbitMessageDto);}
-        if (typeMessage.equals("subscription")) { sendApodUpdateEmail(rabbitMessageDto);}
+            RabbitMessageDto rabbitMessageDto = objectMapper.readValue(message, RabbitMessageDto.class);
+            var typeMessage = rabbitMessageDto.type();
+
+            if (typeMessage.equals("token")) { sendtokenValidationEmail(rabbitMessageDto);}
+            if (typeMessage.equals("subscription")) { sendApodUpdateEmail(rabbitMessageDto);}
+        }
+
+        catch (Exception error) {
+            log.error(error.getMessage(), error);
+        }
     }
 
     private void sendtokenValidationEmail(RabbitMessageDto rabbitMessageDto) throws InterruptedException, IOException, MessagingException {
