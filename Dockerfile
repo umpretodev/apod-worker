@@ -5,5 +5,5 @@ RUN ./gradlew build -x test
 
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /opt/app-root/src
-COPY --from=builder /build/libs/backend-0.0.1-SNAPSHOT.jar /opt/app-root/src/app.jar
+COPY --from=builder /build/libs/worker-0.0.1-SNAPSHOT.jar /opt/app-root/src/app.jar
 CMD java $JAVA_OPTS -jar app.jar
