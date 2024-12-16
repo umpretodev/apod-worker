@@ -1,7 +1,7 @@
 FROM eclipse-temurin:17-jdk-alpine as builder
 
 COPY . .
-ADD src/main/java/resources/template src/main/java/resources/template
+COPY src/main/java/resources/template src/main/java/resources/template
 
 RUN apk --update add --no-cache netcat-openbsd
 RUN ./gradlew build -x test
