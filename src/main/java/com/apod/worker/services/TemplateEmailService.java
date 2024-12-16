@@ -20,7 +20,8 @@ public class TemplateEmailService {
     }
 
     public String formatTokenEmailHtml(String token, String username) throws IOException {
-        String htmlBody = readHtmlFile("src/main/resources/templates/TokenEmailTemplate.html");
+        String htmlBody = readHtmlFile("/opt/app-root/src/templates/TokenEmailTemplate.html");
+        //String htmlBody = readHtmlFile("src/main/resources/templates/TokenEmailTemplate.html");
 
         htmlBody = htmlBody.replace("$USERNAME$", username)
                             .replace("$TOKEN$", token);
@@ -29,7 +30,8 @@ public class TemplateEmailService {
     }
 
     public String formatSubscriptionEmailHtml(String username) throws IOException {
-        String htmlBody = readHtmlFile("src/main/resources/templates/SubscriptionEmailTemplate.html");
+        String htmlBody = readHtmlFile("/opt/app-root/src/templates/SubscriptionEmailTemplate.html");
+        //String htmlBody = readHtmlFile("src/main/resources/templates/SubscriptionEmailTemplate.html");
 
         htmlBody = htmlBody.replace("$TITLE$", redisService.get("apod_title"))
                             .replace("$DATE$", redisService.get("apod_date"))
